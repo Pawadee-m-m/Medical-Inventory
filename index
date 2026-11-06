@@ -3,348 +3,201 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>สต็อกเวชภัณฑ์</title>
+<title>แดชบอร์ดสต็อกเวชภัณฑ์</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f2f5f4;--surface:#fff;--ink:#17262b;--muted:#5b6b70;--line:#d9e1df;--accent:#0e7c66;--accent-ink:#fff;--warn:#b7791f;--bad:#b42318;--ok:#0e7c66}
-@media (prefers-color-scheme:dark){:root{--bg:#10191b;--surface:#18252a;--ink:#e7efed;--muted:#97a8ab;--line:#2a3a3f;--accent:#3cc4a6;--accent-ink:#06201a;--warn:#e0a84a;--bad:#f0877c;--ok:#3cc4a6}}
+:root{--bg:#f2f5f4;--surface:#fff;--ink:#17262b;--muted:#5b6b70;--line:#d9e1df;--accent:#0e7c66;--warn:#b7791f;--bad:#b42318}
+@media (prefers-color-scheme:dark){:root{--bg:#10191b;--surface:#18252a;--ink:#e7efed;--muted:#97a8ab;--line:#2a3a3f;--accent:#3cc4a6;--warn:#e0a84a;--bad:#f0877c}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 "Noto Sans Thai",system-ui,sans-serif}
-.wrap{max-width:720px;margin:0 auto;padding:0 16px 48px}
-header{position:sticky;top:0;background:var(--bg);padding:16px 0 0;z-index:2}
-h1{font-size:20px;font-weight:700;margin:0 0 12px}
-.tabs{display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--line)}
-.tab{flex:1 0 auto;padding:10px 12px;white-space:nowrap;background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);font:inherit;font-weight:500;cursor:pointer}
-.tab[aria-selected=true]{color:var(--ink);border-color:var(--accent)}
-button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.chips{display:flex;gap:8px;overflow-x:auto;padding:14px 0 4px}
-.chip{flex:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font:inherit;font-size:14px;cursor:pointer}
-.chip b{font-weight:700;margin-left:6px}
-.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit}
-.search{margin:10px 0 4px}
-.row{display:flex;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--ok);border-radius:8px;padding:10px 12px;margin-top:8px}
-.row.warn{border-left-color:var(--warn)}.row.bad{border-left-color:var(--bad)}
-.row .main{flex:1;min-width:0}
-.name{font-weight:500}
-.sub{font-size:13px;color:var(--muted)}
-.qty{text-align:right;white-space:nowrap}
-.qty b{font-size:20px}
-.flag{font-size:13px;font-weight:500}.flag.warn{color:var(--warn)}.flag.bad{color:var(--bad)}
-.empty{padding:32px 0;text-align:center;color:var(--muted)}
-form{display:grid;gap:16px;padding-top:20px}
-label{display:grid;gap:6px;font-weight:500}
-.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.seg button{padding:10px 0;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-weight:500;cursor:pointer}
-.seg button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.hint{font-size:14px;color:var(--muted);margin:-8px 0 0}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.save{padding:14px;border:0;border-radius:8px;background:var(--accent);color:var(--accent-ink);font:inherit;font-weight:700;cursor:pointer}
-.save[disabled]{opacity:.6}
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;max-width:90%}
-.preview{font-size:14px;color:var(--muted);margin:-8px 0 0}.preview b{color:var(--ink)}.mini{margin-top:6px;padding:4px 10px;border:1px solid var(--bad);border-radius:6px;background:none;color:var(--bad);font:inherit;font-size:13px;cursor:pointer}
-.newlot{display:grid;gap:16px;padding:12px;border:1px dashed var(--line);border-radius:8px}.check{display:flex;gap:8px;align-items:center;font-weight:400}.check input{width:auto}
-.alert{margin-top:14px;padding:10px 12px;border:1px solid var(--bad);border-radius:8px;background:var(--surface);color:var(--bad);font-weight:500;cursor:pointer}
-h2{font-size:16px;margin:24px 0 0}.bar{display:grid;grid-template-columns:110px 1fr 28px;gap:8px;align-items:center;margin-top:8px;font-size:14px}.bar i{display:block;height:10px;background:var(--accent);border-radius:5px}.bar b{text-align:right}
-[hidden]{display:none!important}
+.wrap{max-width:960px;margin:0 auto;padding:24px 16px 56px}
+h1{font-size:22px;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:4px 0 20px;color:var(--muted);font-size:14px}
+.badge{padding:2px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font-weight:500}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:8px;padding:12px}
+.stat.warn{border-top-color:var(--warn)}.stat.bad{border-top-color:var(--bad)}
+.stat span{display:block;font-size:14px;color:var(--muted)}.stat b{font-size:26px;line-height:1.3}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px}
+.card.wide{grid-column:1/-1}
+h2{font-size:16px;margin:0 0 4px}.sub{font-size:13px;color:var(--muted);margin:0 0 12px}
+.bar{display:grid;grid-template-columns:96px 1fr 40px;gap:8px;align-items:center;margin-top:6px;font-size:14px}
+.bar i{display:block;height:10px;border-radius:5px;background:var(--accent)}.bar b{text-align:right}
+.item{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid var(--line)}
+.item:first-of-type{border-top:0}.item .s{font-size:13px;color:var(--muted)}
+.tag{font-size:13px;font-weight:500;white-space:nowrap}.tag.warn{color:var(--warn)}.tag.bad{color:var(--bad)}
+.empty{color:var(--muted);padding:8px 0}
+@media (max-width:640px){.stats{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.bar{grid-template-columns:72px 1fr 36px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <h1>สต็อกเวชภัณฑ์</h1>
-    <div class="tabs" role="tablist">
-      <button class="tab" role="tab" id="t-stock" aria-selected="true">สต็อก</button>
-      <button class="tab" role="tab" id="t-dash" aria-selected="false">ภาพรวม</button>
-      <button class="tab" role="tab" id="t-eval" aria-selected="false">ประเมิน</button>
-      <button class="tab" role="tab" id="t-price" aria-selected="false">เปรียบเทียบราคา</button>
-      <button class="tab" role="tab" id="t-form" aria-selected="false">บันทึกรายการ</button>
-    </div>
-  </header>
-
-  <section id="p-stock">
-    <div class="alert" id="alert" role="button" tabindex="0" hidden></div>
-    <div class="chips" id="chips"></div>
-    <input class="search" id="q" type="search" placeholder="ค้นหาชื่อหรือ Lot Code" aria-label="ค้นหา">
-    <div id="list"><div class="empty">กำลังโหลดข้อมูล</div></div>
-  </section>
-
-  <section id="p-form" hidden>
-    <form id="f">
-      <div class="seg" id="seg">
-        <button type="button" data-t="รับเข้า" aria-pressed="true">รับเข้า</button>
-        <button type="button" data-t="เบิก" aria-pressed="false">เบิก</button>
-        <button type="button" data-t="ปรับยอด" aria-pressed="false">ปรับยอด</button>
-      </div>
-      <p class="hint" id="hint"></p>
-      <label>รายการ<select id="lot" required></select></label>
-      <p class="preview" id="preview" hidden></p>
-      <label class="check" id="nlcheck"><input id="isnew" type="checkbox">ล็อตใหม่หรือขนาดใหม่ที่ยังไม่มีในสต็อก</label>
-      <div class="newlot" id="newlot" hidden>
-        <label>Item ID<input id="nitem" list="itemids" placeholder="เช่น WND001-3"></label>
-        <datalist id="itemids"></datalist>
-        <label>ชื่อ<input id="nname" type="text"></label>
-        <div class="two"><label>ขนาด<input id="nsize" type="text"></label><label>หน่วย<input id="nunit" type="text"></label></div>
-        <label>วันหมดอายุ (เว้นว่างถ้าไม่มี)<input id="nexp" type="date"></label>
-        <label>Lot Code (สร้างให้ แก้ได้)<input id="nlot" type="text"></label>
-      </div>
-      <div class="two">
-        <label>วันที่<input id="date" type="date" required></label>
-        <label id="qlabel">จำนวน<input id="qty" type="number" min="0" step="any" inputmode="decimal" required></label>
-      </div>
-      <label id="plabel">ราคา/หน่วย (บาท)<input id="price" type="number" min="0" step="any" inputmode="decimal"></label>
-      <label>เหตุผลหรือกิจกรรม<input id="reason" type="text" placeholder="เช่น งานกีฬาสี"></label>
-      <label id="blabel" hidden>ผู้ยืม<input id="borrower" type="text"></label>
-      <label>หมายเหตุ<textarea id="note" rows="2"></textarea></label>
-      <button class="save" id="save" type="submit">บันทึกรายการ</button>
-    </form>
-  </section>
-
-  <section id="p-dash" hidden><div id="dash"></div></section>
-  <section id="p-eval" hidden><div id="eval"></div></section>
-
-  <section id="p-price" hidden>
-    <p class="hint" style="margin-top:16px">เก็บราคาที่หามาเปรียบเทียบ แยกจากรายการซื้อและเงินที่ใช้จริง ไม่ถูกรวมในยอดใดๆ</p>
-    <form id="qf">
-      <label>ชื่อสินค้า<input id="qname" list="names" required></label>
-      <datalist id="names"></datalist>
-      <div class="two"><label>ขนาด<input id="qsize"></label><label>ร้าน<input id="qshop" required></label></div>
-      <div class="two"><label>ราคา (บาท)<input id="qprice" type="number" min="0" step="any" inputmode="decimal" required></label><label>จำนวนที่ได้<input id="qqty" type="number" min="1" step="any" value="1"></label></div>
-      <label>หมายเหตุ<input id="qnote"></label>
-      <button class="save" type="submit">บันทึกราคา</button>
-    </form>
-    <div id="quotes"></div>
-  </section>
+  <h1>แดชบอร์ดสต็อกเวชภัณฑ์</h1>
+  <div class="meta"><span class="badge" id="src">กำลังโหลด</span><span id="upd"></span></div>
+  <div class="stats" id="stats"></div>
+  <div class="grid">
+    <section class="card wide"><h2>ของที่จะหมดอายุ แยกตามเดือน</h2><p class="sub">จำนวนชิ้นที่เหลือ เฉพาะ 12 เดือนข้างหน้า</p><div id="months"></div></section>
+    <section class="card"><h2>ต้องจัดการ</h2><p class="sub">หมดอายุแล้ว ใกล้หมดอายุ และของที่หมด</p><div id="todo"></div></section>
+    <section class="card"><h2>สินค้าตามหมวด</h2><p class="sub">นับจำนวนสินค้า ไม่นับล็อตซ้ำ</p><div id="cats"></div></section>
+    <section class="card wide"><h2>รายการล่าสุด</h2><p class="sub">ความเคลื่อนไหวที่บันทึกไว้ใน Transaction</p><div id="recent"></div></section>
+  </div>
 </div>
-<div class="toast" id="toast" hidden role="status"></div>
 
 <script>
-var items = [], filter = 'all', type = 'รับเข้า';
-var HINTS = {
-  'รับเข้า': 'จำนวนที่ซื้อหรือรับเข้ามาเพิ่ม ไม่ใช่ยอดรวม',
-  'เบิก': 'จำนวนที่เบิกออกไป ต้องใส่วันที่ด้วย ไม่งั้นยอดไม่ลด',
-  'ปรับยอด': 'ยอดที่นับได้จริงตอนนี้ ไม่ใช่จำนวนที่ใช้ไป'
+/* ตั้งค่า: เปลี่ยน source เป็น 'csv' แล้วใส่ลิงก์ Publish to web (รูปแบบ CSV) ของแต่ละแท็บ */
+const CONFIG = {
+  source: 'sample',
+  stockCsv: '',
+  txCsv: '',
+  stockDateOrder: 'dmy',   // รูปแบบวันที่ในแท็บ Stock: dmy = วัน/เดือน/ปี, mdy = เดือน/วัน/ปี
+  txDateOrder: 'mdy',      // รูปแบบวันที่ในแท็บ Transaction
+  soonDays: 60
 };
-var $ = function (id) { return document.getElementById(id); };
-function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
-function status(i) {
-  if (i.days !== null && i.days < 0) return 'expired';
-  if (i.days !== null && i.days <= 60) return 'soon';
-  if (i.qty <= 0) return 'empty';
-  return 'ok';
-}
-function gone(i) { return i.qty <= 0 && i.days !== null && i.days < 0; }
-function counts() {
-  var c = { all: 0, soon: 0, expired: 0, empty: 0 };
-  items.forEach(function (i) {
-    if (gone(i)) return;
-    c.all++;
-    if (i.qty <= 0) c.empty++;
-    else if (i.days !== null && i.days < 0) c.expired++;
-    else if (i.days !== null && i.days <= 60) c.soon++;
-  });
-  return c;
-}
-function renderChips() {
-  var c = counts();
-  $('alert').hidden = !c.expired;
-  $('alert').textContent = 'มีของหมดอายุแล้ว ' + c.expired + ' รายการ กดเพื่อดูและทิ้งออกจากสต็อก';
-  var defs = [['all','ทั้งหมด'],['soon','ใกล้หมดอายุ'],['expired','หมดอายุแล้ว'],['empty','ของหมด']];
-  $('chips').innerHTML = defs.map(function (d) {
-    return '<button class="chip" data-f="' + d[0] + '" aria-pressed="' + (filter === d[0]) + '">' + d[1] + '<b>' + c[d[0]] + '</b></button>';
-  }).join('');
-}
-function renderList() {
-  var q = $('q').value.trim().toLowerCase();
-  var rows = items.filter(function (i) {
-    if (q && (i.name + ' ' + i.lot + ' ' + i.size).toLowerCase().indexOf(q) < 0) return false;
-    if (gone(i)) return false;
-    if (filter === 'soon') return i.qty > 0 && i.days !== null && i.days >= 0 && i.days <= 60;
-    if (filter === 'expired') return i.qty > 0 && i.days !== null && i.days < 0;
-    if (filter === 'empty') return i.qty <= 0;
-    return true;
-  });
-  if (!rows.length) { $('list').innerHTML = '<div class="empty">ไม่พบรายการ ลองเปลี่ยนตัวกรองหรือคำค้นหา</div>'; return; }
-  $('list').innerHTML = rows.map(function (i) {
-    var s = status(i), cls = s === 'expired' || s === 'empty' ? 'bad' : s === 'soon' ? 'warn' : '';
-    var flag = '';
-    if (i.days !== null && i.days < 0) flag = '<div class="flag bad">หมดอายุแล้ว ' + i.exp + '</div>' + (i.qty > 0 ? '<button class="mini" data-d="' + esc(i.lot) + '">ทิ้งของหมดอายุ</button>' : '');
-    else if (i.days !== null && i.days <= 60) flag = '<div class="flag warn">อีก ' + i.days + ' วัน (' + i.exp + ')</div>';
-    else if (i.exp) flag = '<div class="sub">หมดอายุ ' + i.exp + '</div>';
-    return '<div class="row ' + cls + '"><div class="main"><div class="name">' + esc(i.name) + (i.size ? ' ' + esc(i.size) : '') +
-      '</div><div class="sub">' + esc(i.lot) + '</div>' + flag + '</div><div class="qty"><b>' + i.qty + '</b><div class="sub">' + esc(i.unit) + '</div></div></div>';
-  }).join('');
-}
-function renderSelect() {
-  $('lot').innerHTML = '<option value="">เลือกรายการ</option>' + items.map(function (i) {
-    return '<option value="' + esc(i.lot) + '">' + esc(i.name) + (i.size ? ' ' + esc(i.size) : '') + ' (' + esc(i.lot) + ')</option>';
-  }).join('');
-}
-function load() {
-  google.script.run.withSuccessHandler(function (d) {
-    items = d.items; recent = d.recent; renderChips(); renderList(); renderSelect(); renderIds(); renderNames(); upd(); renderDash(); renderEval();
-  }).withFailureHandler(function (e) {
-    $('list').innerHTML = '<div class="empty">โหลดข้อมูลไม่สำเร็จ: ' + esc(e.message) + '</div>';
-  }).getData();
-}
-function renderIds() {
-  var ids = {}; items.forEach(function (i) { ids[i.item] = 1; });
-  $('itemids').innerHTML = Object.keys(ids).map(function (k) { return '<option value="' + esc(k) + '">'; }).join('');
-}
-function today() { return new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10); }
-function cur() { return items.filter(function (i) { return i.lot === $('lot').value; })[0]; }
-function upd() {
-  var p = $('preview'), c = cur(), q = Number($('qty').value);
-  if (!c || $('isnew').checked) { p.hidden = true; return; }
-  var t = 'ตอนนี้เหลือ <b>' + c.qty + ' ' + esc(c.unit) + '</b>';
-  if ($('qty').value !== '') {
-    if (type === 'รับเข้า') t += ' หลังบันทึกจะเป็น <b>' + (c.qty + q) + '</b>';
-    if (type === 'เบิก') t += ' หลังบันทึกจะเป็น <b>' + (c.qty - q) + '</b>';
-    if (type === 'ปรับยอด') t += ' ต่างจากที่ระบบคิด <b>' + (q - c.qty) + '</b>';
-  }
-  p.innerHTML = t; p.hidden = false;
-}
-function toggleNew() {
-  var n = $('isnew').checked;
-  $('newlot').hidden = !n; $('lot').parentNode.hidden = n; $('lot').required = !n;
-  ['nitem', 'nname', 'nlot'].forEach(function (id) { $(id).required = n; });
-  upd();
-}
-function autoLot() {
-  var it = $('nitem').value.trim(), e = $('nexp').value;
-  if (it) $('nlot').value = it + (e ? '-F' + e.slice(2, 4) + e.slice(5, 7) : '-LEG');
-}
-var recent = [], quotes = [];
-function groupItems() {
-  var g = {};
-  items.forEach(function (i) {
-    if (gone(i)) return;
-    var k = g[i.item] = g[i.item] || { name: i.name, size: i.size, unit: i.unit, cat: i.cat, min: null, usable: 0, expired: 0, soon: [] };
-    if (i.min !== null) k.min = i.min;
-    if (i.days !== null && i.days < 0) k.expired += i.qty; else k.usable += i.qty;
-    if (i.qty > 0 && i.days !== null && i.days >= 0 && i.days <= 60) k.soon.push(i);
-  });
-  return Object.keys(g).map(function (k) { return g[k]; });
-}
-function label(g) { return esc(g.name) + (g.size ? ' ' + esc(g.size) : ''); }
-function line(main, sub, right, cls) {
-  return '<div class="row ' + (cls || '') + '"><div class="main"><div class="name">' + main + '</div>' + (sub ? '<div class="sub">' + sub + '</div>' : '') +
-    '</div>' + (right ? '<div class="qty">' + right + '</div>' : '') + '</div>';
-}
-function renderDash() {
-  var c = counts(), g = groupItems(), cats = {};
-  g.forEach(function (x) { var k = x.cat || 'ไม่ระบุหมวด'; cats[k] = (cats[k] || 0) + 1; });
-  var max = Math.max.apply(null, Object.keys(cats).map(function (k) { return cats[k]; }).concat([1]));
-  var h = '<h2>สถานะสต็อก</h2>' + line('สินค้าทั้งหมด', '', '<b>' + g.length + '</b>') +
-    line('ใกล้หมดอายุภายใน 60 วัน', '', '<b>' + c.soon + '</b>', c.soon ? 'warn' : '') +
-    line('หมดอายุแล้วและยังมีของ', '', '<b>' + c.expired + '</b>', c.expired ? 'bad' : '') +
-    line('ของหมด', '', '<b>' + c.empty + '</b>', c.empty ? 'bad' : '');
-  h += '<h2>จำนวนสินค้าตามหมวด</h2>' + Object.keys(cats).map(function (k) {
-    return '<div class="bar"><span>' + esc(k) + '</span><i style="width:' + Math.round(cats[k] / max * 100) + '%"></i><b>' + cats[k] + '</b></div>';
-  }).join('');
-  h += '<h2>รายการล่าสุด</h2>' + (recent.length ? recent.map(function (r) {
-    var it = items.filter(function (i) { return i.lot === r.lot; })[0];
-    return line(esc(it ? it.name + (it.size ? ' ' + it.size : '') : r.lot), r.date + ' ' + esc(r.type), '<b>' + r.q + '</b>');
-  }).join('') : '<div class="empty">ยังไม่มีรายการบันทึก</div>');
-  $('dash').innerHTML = h;
-}
-function renderEval() {
-  var g = groupItems(), hasMin = g.some(function (x) { return x.min !== null; });
-  var buy = g.filter(function (x) { return x.min !== null ? x.usable < x.min : x.usable <= 0; });
-  var h = '<h2>ควรซื้อ</h2>' + (buy.length ? buy.map(function (x) {
-    var need = x.min !== null ? x.min - x.usable : null;
-    return line(label(x), x.min !== null ? 'ใช้ได้ ' + x.usable + ' ต่ำกว่าขั้นต่ำ ' + x.min : 'ของหมด ยังไม่ได้ตั้งขั้นต่ำ',
-      need !== null ? 'ซื้อ <b>' + need + '</b> ' + esc(x.unit) : '', 'bad');
-  }).join('') : '<div class="empty">ตอนนี้ไม่มีรายการที่ต้องซื้อ</div>');
-  if (!hasMin) h += '<p class="hint">เพิ่มคอลัมน์ “ควรมีขั้นต่ำ” ในชีต Stock เพื่อให้ระบบคำนวณจำนวนที่ต้องซื้อ</p>';
-  var exp = g.filter(function (x) { return x.expired > 0; });
-  h += '<h2>หมดอายุแล้ว ต้องทิ้ง</h2>' + (exp.length ? exp.map(function (x) {
-    return line(label(x), 'ไปที่แท็บสต็อกเพื่อกดทิ้ง', '<b>' + x.expired + '</b> ' + esc(x.unit), 'bad');
-  }).join('') : '<div class="empty">ไม่มี</div>');
-  var soon = [];
-  g.forEach(function (x) { x.soon.forEach(function (i) { soon.push(line(label(x), 'Lot ' + esc(i.lot) + ' หมดอายุ ' + i.exp + ' (อีก ' + i.days + ' วัน)', '<b>' + i.qty + '</b> ' + esc(i.unit), 'warn')); }); });
-  h += '<h2>ใกล้หมดอายุ ควรใช้ให้ทัน</h2>' + (soon.length ? soon.join('') : '<div class="empty">ไม่มี</div>');
-  $('eval').innerHTML = h;
-}
-function renderQuotes() {
-  var g = {};
-  quotes.forEach(function (q) { var k = q.name + (q.size ? ' ' + q.size : ''); (g[k] = g[k] || []).push(q); });
-  var keys = Object.keys(g);
-  if (!keys.length) { $('quotes').innerHTML = '<div class="empty">ยังไม่มีราคาที่บันทึกไว้</div>'; return; }
-  $('quotes').innerHTML = keys.map(function (k) {
-    var list = g[k].slice().sort(function (a, b) { return a.unit - b.unit; });
-    return '<h2>' + esc(k) + '</h2>' + list.map(function (q, n) {
-      return line(esc(q.shop), q.date + (q.note ? ' ' + esc(q.note) : ''), '<b>' + q.unit.toFixed(2) + '</b> บาท/หน่วย' + (n === 0 && list.length > 1 ? '<div class="flag">ถูกสุด</div>' : ''), n === 0 ? '' : 'warn');
-    }).join('');
-  }).join('');
-}
-function loadQuotes() {
-  google.script.run.withSuccessHandler(function (q) { quotes = q; renderQuotes(); })
-    .withFailureHandler(function (e) { $('quotes').innerHTML = '<div class="empty">โหลดราคาไม่สำเร็จ: ' + esc(e.message) + '</div>'; }).getQuotes();
-}
-function renderNames() {
-  var n = {}; items.forEach(function (i) { n[i.name] = 1; });
-  $('names').innerHTML = Object.keys(n).map(function (k) { return '<option value="' + esc(k) + '">'; }).join('');
-}
-var TABS = ['stock', 'dash', 'eval', 'price', 'form'];
-function tab(name) {
-  TABS.forEach(function (t) { $('p-' + t).hidden = t !== name; $('t-' + t).setAttribute('aria-selected', t === name); });
-}
-function setType(t) {
-  type = t;
-  document.querySelectorAll('#seg button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.t === t); });
-  $('hint').textContent = HINTS[t];
-  $('plabel').hidden = t !== 'รับเข้า';
-  $('blabel').hidden = t !== 'เบิก';
-  $('nlcheck').hidden = t !== 'รับเข้า';
-  if (t !== 'รับเข้า') { $('isnew').checked = false; toggleNew(); }
-  upd();
-}
-function toast(m) { var t = $('toast'); t.textContent = m; t.hidden = false; setTimeout(function () { t.hidden = true; }, 3000); }
 
-TABS.forEach(function (t) { $('t-' + t).onclick = function () { tab(t); }; });
-$('qf').onsubmit = function (e) {
-  e.preventDefault();
-  google.script.run.withSuccessHandler(function () {
-    $('qprice').value = ''; $('qnote').value = ''; toast('บันทึกราคาแล้ว'); loadQuotes();
-  }).withFailureHandler(function (err) { toast(err.message); })
-    .addQuote({ name: $('qname').value.trim(), size: $('qsize').value.trim(), shop: $('qshop').value.trim(), price: $('qprice').value, qty: $('qqty').value, note: $('qnote').value });
-};
-$('chips').onclick = function (e) { var b = e.target.closest('.chip'); if (b) { filter = b.dataset.f; renderChips(); renderList(); } };
-$('q').oninput = renderList;
-$('seg').onclick = function (e) { var b = e.target.closest('button'); if (b) setType(b.dataset.t); };
-$('alert').onclick = function () { filter = 'expired'; renderChips(); renderList(); };
-$('isnew').onchange = toggleNew;
-$('lot').onchange = upd; $('qty').oninput = upd;
-$('nitem').oninput = autoLot; $('nexp').onchange = autoLot;
-$('list').onclick = function (e) {
-  var b = e.target.closest('[data-d]');
-  if (!b || !confirm('ทิ้งของหมดอายุ Lot นี้ใช่ไหม ระบบจะบันทึกปรับยอดเป็น 0')) return;
-  google.script.run.withSuccessHandler(function () { toast('ทิ้งของหมดอายุแล้ว'); load(); })
-    .withFailureHandler(function (err) { toast(err.message); })
-    .addTx({ type: 'ปรับยอด', lot: b.dataset.d, date: today(), qty: 0, price: '', reason: 'หมดอายุ ทิ้ง', borrower: '', note: '' });
-};
-$('f').onsubmit = function (e) {
-  e.preventDefault();
-  var btn = $('save'), isNew = $('isnew').checked;
-  btn.disabled = true; btn.textContent = 'กำลังบันทึก';
-  var p = { type: type, lot: isNew ? $('nlot').value.trim() : $('lot').value, date: $('date').value, qty: $('qty').value,
-            price: $('price').value, reason: $('reason').value, borrower: $('borrower').value, note: $('note').value };
-  var fail = function (err) { btn.disabled = false; btn.textContent = 'บันทึกรายการ'; toast(err.message); };
-  var send = function () {
-    google.script.run.withSuccessHandler(function () {
-      btn.disabled = false; btn.textContent = 'บันทึกรายการ';
-      $('qty').value = ''; $('price').value = ''; $('note').value = ''; $('isnew').checked = false; toggleNew();
-      toast('บันทึกรายการแล้ว'); load();
-    }).withFailureHandler(fail).addTx(p);
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const DAY = 86400000;
+const MONTHS = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+const midnight = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+const today = midnight(new Date());
+const fmt = d => String(d.getDate()).padStart(2, '0') + '/' + String(d.getMonth() + 1).padStart(2, '0') + '/' + d.getFullYear();
+const num = v => Number(String(v).replace(/,/g, '').replace(/[^\d.\-]/g, '')) || 0;
+
+/* ---------- อ่านข้อมูล ---------- */
+function parseCsv(t) {
+  const rows = []; let row = [], cur = '', q = false;
+  for (let i = 0; i < t.length; i++) {
+    const c = t[i];
+    if (q) { if (c === '"') { if (t[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += c; }
+    else if (c === '"') q = true;
+    else if (c === ',') { row.push(cur); cur = ''; }
+    else if (c === '\n') { row.push(cur); rows.push(row); row = []; cur = ''; }
+    else if (c !== '\r') cur += c;
+  }
+  if (cur || row.length) { row.push(cur); rows.push(row); }
+  return rows;
+}
+function objects(text) {
+  const rows = parseCsv(text), head = rows[0].map(h => h.trim());
+  return rows.slice(1).map(r => Object.fromEntries(head.map((h, i) => [h, (r[i] || '').trim()])));
+}
+function parseDate(s, order) {
+  const m = String(s).match(/^(\d{1,4})[\/\-](\d{1,2})[\/\-](\d{1,4})$/);
+  if (!m) return null;
+  let a = +m[1], b = +m[2], c = +m[3], y, mo, d;
+  if (a > 31) { y = a; mo = b; d = c; }
+  else if (order === 'mdy') { mo = a; d = b; y = c; }
+  else { d = a; mo = b; y = c; }
+  if (y > 2400) y -= 543;
+  if (mo < 1 || mo > 12) return null;
+  return new Date(y, mo - 1, d);
+}
+async function fetchCsv(url) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error('โหลดไม่ได้ (' + r.status + ')');
+  return objects(await r.text());
+}
+async function loadData() {
+  if (CONFIG.source !== 'csv') return sample();
+  const [s, t] = await Promise.all([fetchCsv(CONFIG.stockCsv), fetchCsv(CONFIG.txCsv)]);
+  return {
+    stock: s.filter(r => r['Lot Code']).map(r => ({
+      lot: r['Lot Code'], item: r['Item ID'], name: r['ชื่อ'], size: r['ปริมาตร/ขนาด'], cat: r['หมวดหมู่'] || 'ไม่ระบุหมวด',
+      unit: r['หน่วย'], qty: num(r['จำนวน']), exp: parseDate(r['วันหมดอายุ'], CONFIG.stockDateOrder)
+    })),
+    tx: t.filter(r => r['Lot Code'] && parseDate(r['วันที่'], CONFIG.txDateOrder)).map(r => ({
+      date: parseDate(r['วันที่'], CONFIG.txDateOrder), lot: r['Lot Code'], type: r['ประเภทรายการ'], qty: num(r['จำนวน'])
+    }))
   };
-  if (!isNew) return send();
-  google.script.run.withSuccessHandler(send).withFailureHandler(fail)
-    .addLot({ item: $('nitem').value.trim(), lot: p.lot, name: $('nname').value.trim(), size: $('nsize').value.trim(), unit: $('nunit').value.trim(), exp: $('nexp').value });
-};
-$('date').value = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
-setType('รับเข้า'); load(); loadQuotes();
+}
+
+/* ข้อมูลตัวอย่าง ไม่ใช่ข้อมูลจริง วันที่ขยับตามวันนี้เพื่อให้แดชบอร์ดดูมีชีวิต */
+function sample() {
+  const d = n => new Date(today.getTime() + n * DAY);
+  const S = (item, name, size, cat, unit, qty, exp) => ({ lot: item + (exp ? '-F' : '-LEG'), item, name, size, cat, unit, qty, exp });
+  const stock = [
+    S('EXT001-1', 'เจลแก้ปวดกล้ามเนื้อ', '250 ml', 'ยาใช้ภายนอก', 'หลอด', 12, d(430)),
+    S('EXT002-1', 'น้ำยาฆ่าเชื้อ', '15 ml', 'ยาใช้ภายนอก', 'ขวด', 6, d(25)),
+    S('EXT002-1', 'น้ำยาฆ่าเชื้อ', '15 ml', 'ยาใช้ภายนอก', 'ขวด', 4, d(380)),
+    S('INT001-1', 'เกลือแร่', 'ซอง', 'ยาใช้ภายใน', 'ซอง', 90, d(-40)),
+    S('INT002-1', 'ยาแก้ปวดลดไข้', '500 mg', 'ยาใช้ภายใน', 'เม็ด', 9, null),
+    S('INT003-1', 'ยาแก้แพ้', '10 mg', 'ยาใช้ภายใน', 'เม็ด', 71, d(300)),
+    S('INT004-1', 'ยาธาตุน้ำขาว', '100 ml', 'ยาใช้ภายใน', 'ขวด', 3, d(48)),
+    S('WND001-1', 'น้ำเกลือ', '1000 ml', 'อุปกรณ์ทำแผล', 'ขวด', 1, d(210)),
+    S('WND002-1', 'ผ้าก๊อซ', '3x3 นิ้ว', 'อุปกรณ์ทำแผล', 'กล่อง', 0, d(520)),
+    S('WND003-1', 'พลาสเตอร์ปิดแผล', '', 'อุปกรณ์ทำแผล', 'กล่อง', 5, d(160)),
+    S('OT001-1', 'ถุงมือยาง', 'ไซส์ M', 'อื่นๆ', 'ข้าง', 20, null),
+    S('OT002-1', 'เทอร์โมมิเตอร์', '', 'อื่นๆ', 'อัน', 2, null)
+  ];
+  const T = (n, lot, type, qty) => ({ date: d(n), lot, type, qty });
+  const tx = [
+    T(-30, 'INT003-1-F', 'ปรับยอด', 80), T(-12, 'INT003-1-F', 'เบิก', 9),
+    T(-20, 'WND001-1-F', 'ปรับยอด', 4), T(-9, 'WND001-1-F', 'เบิก', 3),
+    T(-6, 'EXT002-1-F', 'รับเข้า', 4), T(-3, 'WND002-1-F', 'ปรับยอด', 0), T(-1, 'INT004-1-F', 'เบิก', 1)
+  ];
+  return { stock, tx };
+}
+
+/* ---------- คำนวณ ---------- */
+function balance(s, list) {
+  if (!list.length) return s.qty;
+  const adj = list.filter(x => x.type === 'ปรับยอด');
+  const last = adj.length ? Math.max(...adj.map(x => x.date.getTime())) : 0;
+  const sum = f => list.filter(f).reduce((a, x) => a + x.qty, 0);
+  return sum(x => x.type === 'ปรับยอด' && x.date.getTime() === last)
+    + sum(x => x.type === 'รับเข้า' && x.date.getTime() > last)
+    - sum(x => x.type === 'เบิก' && x.date.getTime() > last);
+}
+function compute(data) {
+  const byLot = {};
+  data.tx.forEach(t => (byLot[t.lot] = byLot[t.lot] || []).push(t));
+  return data.stock.map(s => {
+    const days = s.exp ? Math.round((midnight(s.exp) - today) / DAY) : null;
+    return { ...s, qty: balance(s, byLot[s.lot] || []), days };
+  }).filter(i => !(i.qty <= 0 && i.days !== null && i.days < 0));
+}
+
+/* ---------- แสดงผล ---------- */
+function render(data) {
+  const items = compute(data), soon = CONFIG.soonDays;
+  const expired = items.filter(i => i.qty > 0 && i.days !== null && i.days < 0);
+  const near = items.filter(i => i.qty > 0 && i.days !== null && i.days >= 0 && i.days <= soon).sort((a, b) => a.days - b.days);
+  const out = items.filter(i => i.qty <= 0);
+  const stat = (l, v, c) => '<div class="stat ' + (v && c ? c : '') + '"><span>' + l + '</span><b>' + v + '</b></div>';
+  $('stats').innerHTML = stat('สินค้าทั้งหมด', new Set(items.map(i => i.item)).size, '') +
+    stat('ใกล้หมดอายุ ' + soon + ' วัน', near.length, 'warn') + stat('หมดอายุแล้ว', expired.length, 'bad') + stat('ของหมด', out.length, 'bad');
+
+  const buckets = Array.from({ length: 12 }, (_, k) => {
+    const m = new Date(today.getFullYear(), today.getMonth() + k, 1);
+    return { label: MONTHS[m.getMonth()] + ' ' + String(m.getFullYear()).slice(2), y: m.getFullYear(), m: m.getMonth(), qty: 0 };
+  });
+  items.forEach(i => { if (i.qty > 0 && i.exp && i.days >= 0) { const b = buckets.find(b => b.y === i.exp.getFullYear() && b.m === i.exp.getMonth()); if (b) b.qty += i.qty; } });
+  const mx = Math.max(1, ...buckets.map(b => b.qty));
+  $('months').innerHTML = buckets.map(b => '<div class="bar"><span>' + b.label + '</span><i style="width:' + (b.qty ? Math.max(2, Math.round(b.qty / mx * 100)) : 0) + '%"></i><b>' + b.qty + '</b></div>').join('');
+
+  const row = (i, tag, cls) => '<div class="item"><div>' + esc(i.name) + (i.size ? ' ' + esc(i.size) : '') + '<div class="s">' + esc(i.lot) + ' เหลือ ' + i.qty + ' ' + esc(i.unit) + '</div></div><div class="tag ' + cls + '">' + tag + '</div></div>';
+  const todo = expired.map(i => row(i, 'หมดอายุแล้ว', 'bad')).concat(near.map(i => row(i, 'อีก ' + i.days + ' วัน', 'warn')), out.map(i => row(i, 'ของหมด', 'bad')));
+  $('todo').innerHTML = todo.length ? todo.join('') : '<div class="empty">ไม่มีรายการที่ต้องจัดการ</div>';
+
+  const cats = {};
+  items.forEach(i => { (cats[i.cat || 'ไม่ระบุหมวด'] = cats[i.cat || 'ไม่ระบุหมวด'] || new Set()).add(i.item); });
+  const cm = Math.max(1, ...Object.values(cats).map(s => s.size));
+  $('cats').innerHTML = Object.keys(cats).map(k => '<div class="bar"><span>' + esc(k) + '</span><i style="width:' + Math.round(cats[k].size / cm * 100) + '%"></i><b>' + cats[k].size + '</b></div>').join('');
+
+  const name = lot => { const s = data.stock.find(s => s.lot === lot); return s ? s.name + (s.size ? ' ' + s.size : '') : lot; };
+  const recent = data.tx.slice().sort((a, b) => b.date - a.date).slice(0, 8);
+  $('recent').innerHTML = recent.length ? recent.map(t => '<div class="item"><div>' + esc(name(t.lot)) + '<div class="s">' + fmt(t.date) + ' ' + esc(t.type) + '</div></div><div class="tag">' + t.qty + '</div></div>').join('') : '<div class="empty">ยังไม่มีรายการ</div>';
+
+  $('src').textContent = CONFIG.source === 'csv' ? 'ข้อมูลจาก Google Sheet' : 'ข้อมูลตัวอย่าง';
+  $('upd').textContent = 'อัปเดตเมื่อ ' + fmt(new Date()) + ' ' + new Date().toTimeString().slice(0, 5);
+}
+
+loadData().then(render).catch(e => {
+  $('src').textContent = 'โหลดข้อมูลไม่สำเร็จ';
+  $('stats').innerHTML = '<div class="card wide">' + esc(e.message) + ' ตรวจลิงก์ CSV ใน CONFIG และดูว่าเปิด Publish to web แล้ว</div>';
+});
 </script>
 </body>
 </html>
